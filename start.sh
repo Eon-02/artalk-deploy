@@ -22,4 +22,7 @@ elif [ -n "$RAILWAY_PUBLIC_DOMAIN" ]; then
   echo "Artalk API 地址: https://$RAILWAY_PUBLIC_DOMAIN"
 fi
 
+# 启用管理员认证
+export ARTALK_ADMIN__ENABLED=true
+
 exec /app/artalk server -c /app/artalk.yml --port $PORT

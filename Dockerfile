@@ -2,6 +2,10 @@ FROM golang:1.22-alpine AS builder
 
 RUN apk add --no-cache wget tar
 
+# CACHEBUST: 强制使用最新的 artalk.yml（admin.enabled: true）
+ARG CACHEBUST
+RUN echo "Cachebuster: ${CACHEBUST:-default}"
+
 WORKDIR /build
 RUN wget https://github.com/ArtalkJS/Artalk/releases/download/v2.9.1/artalk_v2.9.1_linux_amd64.tar.gz && \
     tar -zxvf artalk_v2.9.1_linux_amd64.tar.gz --strip-components=1
