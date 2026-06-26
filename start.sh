@@ -23,6 +23,6 @@ elif [ -n "$RAILWAY_PUBLIC_DOMAIN" ]; then
 fi
 
 # 启用管理员认证
-export ARTALK_ADMIN__ENABLED=true
+export ARTALK_AUTH_ENABLED=true
 
 exec /app/artalk server -c /app/artalk.yml --port $PORT

@@ -59,6 +59,15 @@ frontend:
   flatMode: auto
   nestMax: 2
 
-# 管理员设置 - 开启认证 API
-admin:
+
+# 认证 API
+auth:
+  # 启用认证 API
   enabled: true
+  # 允许匿名评论
+  anonymous: false
+  # 回调地址
+  callback: "https://artalk-deploy-production.up.railway.app/api/v2/auth/{provider}/callback"
+  # 邮箱密码登录
+  email:
+    enabled: true
