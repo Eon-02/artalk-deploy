@@ -1,6 +1,6 @@
-# Artalk 配置文件 - 用于 Render 部署
+# Artalk 配置文件 - 用于 Hugging Face Spaces 部署
 host: "0.0.0.0"
-port: 23366
+port: 7860
 app_key: "makocode-artalk-key-2024"
 debug: false
 locale: zh-CN
@@ -8,18 +8,10 @@ timezone: Asia/Shanghai
 site_default: "aaayuzu 留言板"
 site_url: "https://aaayuzu.cc.cd"
 
-# 数据库 - 通过 Render 的环境变量自动配置
+# 数据库 - 使用 SQLite（HF Spaces 的 /data 目录持久化存储）
 db:
-  type: pgsql
-  name: artalk
-  host: localhost
-  port: 5432
-  user: artalk
-  password: ""
-  ssl: false
-  charset: utf8
-  table_prefix: ""
-  prepare_stmt: true
+  type: sqlite
+  file: /data/artalk/artalk.db
 
 login_timeout: 259200
 
@@ -29,7 +21,7 @@ http:
 
 log:
   enabled: true
-  filename: ./data/artalk.log
+  filename: /data/artalk/artalk.log
 
 cache:
   enabled: false
@@ -38,6 +30,7 @@ cache:
 
 trusted_domains:
   - https://aaayuzu.cc.cd
+  - https://*.hf.space
 
 ssl:
   enabled: false
@@ -54,7 +47,7 @@ captcha:
 
 img_upload:
   enabled: true
-  path: ./data/artalk-img/
+  path: /data/artalk/artalk-img/
   max_size: 5
 
 frontend:

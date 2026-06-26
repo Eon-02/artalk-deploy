@@ -18,6 +18,7 @@ COPY start.sh /app/start.sh
 
 RUN chmod +x /app/artalk /app/start.sh
 
-EXPOSE 23366
+# Hugging Face Spaces 默认端口
+EXPOSE 7860
 
 CMD ["/app/start.sh"]

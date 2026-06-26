@@ -1,51 +1,65 @@
-# Artalk Render 部署
+# Artalk Deploy — Hugging Face Spaces 🚀
 
-一键部署 Artalk 评论系统到 Render。
+为 [aaayuzu.cc.cd](https://aaayuzu.cc.cd) 部署 Artalk 评论系统。
 
-## 部署步骤
+## 一键部署到 Hugging Face Spaces
 
-### 方式一：一键部署（推荐）
+### 方式一：连接 GitHub 仓库（推荐）
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+1. 打开 https://huggingface.co/new-space
+2. 填写以下信息：
+   - **Space Name**: `artalk-deploy`
+   - **License**: 选 `MIT`
+   - **Space SDK**: 选 **Docker**
+   - **Space Hardware**: 选 **CPU basic**（免费）
+   - **Repository**: 点 "Connect Git Repository" → 连接 `Eon-02/artalk-deploy`
+3. 点 **Create Space**
+4. 等待自动构建完成（约 3-5 分钟）
 
-> 点击上面的按钮，登录 Render 后会自动识别 `render.yaml` 配置。
-
-### 方式二：手动配置
-
-1. 登录 [Render Dashboard](https://dashboard.render.com)
-2. 点击 **New +** → **Blueprint**
-3. 连接此 GitHub 仓库
-4. Render 自动识别 `render.yaml`，创建 Web Service + PostgreSQL
-5. 部署完成后，服务会自动启动
-
-## 部署后
-
-1. Render 会给你的服务分配一个 `.onrender.com` 域名
-2. 在 Render Dashboard 中设置自定义域名（可选）：`comment.aaayuzu.cc.cd`
-3. 配置 DNS：将 `comment.aaayuzu.cc.cd` 的 CNAME 指向 Render 分配的服务域名
-
-## 初始化管理员
-
-部署完成后，通过终端连接 Render 服务：
+### 方式二：手动推送
 
 ```bash
-# 通过 Render Shell 连接
-# 在 Render Dashboard → Artalk Service → Shell
-./artalk admin add -u admin -e admin@example.com -p 你的密码
+git clone https://huggingface.co/spaces/你的用户名/artalk-deploy
+cd artalk-deploy
+# 把本仓库的文件复制进去
+cp -r ../artalk-deploy/* .
+git add .
+git commit -m "初始化 Artalk 部署"
+git push
 ```
 
-或者在 GitHub Pages 前端集成：
+## 部署完成后
+
+### 第一步：创建管理员账号
+
+在 Space 页面点右上角的 **三个点 → Connect → Shell**，运行：
+
+```bash
+/app/artalk admin add -u admin -e admin@example.com -p <你的密码>
+```
+
+### 第二步：集成到网站
+
+拿到 Space 的域名（如 `https://你的用户名-artalk-deploy.hf.space`），在网页中添加：
 
 ```html
-<link href="https://你的-render-域名/dist/Artalk.css" rel="stylesheet">
-<script src="https://你的-render-域名/dist/Artalk.js"></script>
+<link href="https://你的用户名-artalk-deploy.hf.space/dist/Artalk.css" rel="stylesheet">
+<script src="https://你的用户名-artalk-deploy.hf.space/dist/Artalk.js"></script>
 <div id="Comments"></div>
 <script>
 Artalk.init({
   el: '#Comments',
   pageKey: '/guestbook',
-  server: 'https://comment.aaayuzu.cc.cd',
+  server: 'https://你的用户名-artalk-deploy.hf.space',
   site: 'aaayuzu 留言板',
 })
 </script>
 ```
+
+## 文件说明
+
+| 文件 | 用途 |
+|------|------|
+| `Dockerfile` | HF Spaces 构建镜像的配方（暴露端口 7860） |
+| `artalk.yml` | Artalk 配置（SQLite + /data 持久化） |
+| `start.sh` | 启动脚本（适配 HF Spaces 的 \$PORT 环境变量） |
