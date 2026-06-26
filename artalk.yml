@@ -30,8 +30,11 @@ cache:
 
 trusted_domains:
   - https://aaayuzu.cc.cd
+  - https://firefly.cuteleaf.cn
   - https://*.railway.app
   - https://*.up.railway.app
+  - http://localhost:4321
+  - http://localhost:3000
 
 ssl:
   enabled: false
