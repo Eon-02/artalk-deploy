@@ -1,6 +1,6 @@
-# Artalk 配置文件 - 用于 Hugging Face Spaces 部署
+# Artalk 配置文件 - 用于 Railway 部署
 host: "0.0.0.0"
-port: 7860
+port: 8080  # start.sh 中通过 -p $PORT 会覆盖此值
 app_key: "makocode-artalk-key-2024"
 debug: false
 locale: zh-CN
@@ -30,7 +30,8 @@ cache:
 
 trusted_domains:
   - https://aaayuzu.cc.cd
-  - https://*.hf.space
+  - https://*.railway.app
+  - https://*.up.railway.app
 
 ssl:
   enabled: false

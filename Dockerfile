@@ -18,7 +18,7 @@ COPY start.sh /app/start.sh
 
 RUN chmod +x /app/artalk /app/start.sh
 
-# Hugging Face Spaces 默认端口
-EXPOSE 7860
+## Railway 通过 PORT 环境变量动态分配端口
+EXPOSE 8080
 
 CMD ["/app/start.sh"]
