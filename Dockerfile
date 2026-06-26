@@ -26,3 +26,4 @@ RUN chmod +x /app/artalk /app/start.sh
 EXPOSE 8080
 
 CMD ["/app/start.sh"]
+# Build timestamp: 1782489037
