@@ -59,7 +59,6 @@ frontend:
   flatMode: auto
   nestMax: 2
 
-
 # 认证 API
 auth:
   # 启用认证 API
@@ -71,3 +70,11 @@ auth:
   # 邮箱密码登录
   email:
     enabled: true
+
+# 管理员账号 (启动时自动创建)
+admin_users:
+  - name: "aayu"
+    email: "admin@aaayuzu.cc.cd"
+    password: "aayuAdmin123!"
+    badge_name: "管理员"
+    badge_color: "#FF6B9D"
