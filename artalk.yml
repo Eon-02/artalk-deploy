@@ -1,0 +1,66 @@
+# Artalk 配置文件 - 用于 Render 部署
+host: "0.0.0.0"
+port: 23366
+app_key: "makocode-artalk-key-2024"
+debug: false
+locale: zh-CN
+timezone: Asia/Shanghai
+site_default: "aaayuzu 留言板"
+site_url: "https://aaayuzu.cc.cd"
+
+# 数据库 - 通过 Render 的环境变量自动配置
+db:
+  type: pgsql
+  name: artalk
+  host: localhost
+  port: 5432
+  user: artalk
+  password: ""
+  ssl: false
+  charset: utf8
+  table_prefix: ""
+  prepare_stmt: true
+
+login_timeout: 259200
+
+http:
+  body_limit: 100
+  proxy_header: "X-Forwarded-For"
+
+log:
+  enabled: true
+  filename: ./data/artalk.log
+
+cache:
+  enabled: false
+  type: builtin
+  expires: 30
+
+trusted_domains:
+  - https://aaayuzu.cc.cd
+
+ssl:
+  enabled: false
+
+moderator:
+  pending_default: false
+
+captcha:
+  enabled: true
+  always: false
+  captcha_type: image
+  action_limit: 3
+  action_reset: 60
+
+img_upload:
+  enabled: true
+  path: ./data/artalk-img/
+  max_size: 5
+
+frontend:
+  editorTravel: true
+  vote: true
+  uaBadge: false
+  listSort: true
+  flatMode: auto
+  nestMax: 2
