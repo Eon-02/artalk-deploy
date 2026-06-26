@@ -25,5 +25,6 @@ RUN chmod +x /app/artalk /app/start.sh
 ## Railway 通过 PORT 环境变量动态分配端口
 EXPOSE 8080
 
+# Railway auto-deploy trigger
 CMD ["/app/start.sh"]
 # Build timestamp: 1782489037
