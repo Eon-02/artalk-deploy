@@ -58,3 +58,7 @@ frontend:
   listSort: true
   flatMode: auto
   nestMax: 2
+
+# 管理员设置 - 开启认证 API
+admin:
+  enabled: true
