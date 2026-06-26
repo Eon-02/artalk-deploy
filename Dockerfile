@@ -4,7 +4,7 @@ RUN apk add --no-cache wget tar
 
 WORKDIR /build
 RUN wget https://github.com/ArtalkJS/Artalk/releases/download/v2.9.1/artalk_v2.9.1_linux_amd64.tar.gz && \
-    tar -zxvf artalk_v2.9.1_linux_amd64.tar.gz
+    tar -zxvf artalk_v2.9.1_linux_amd64.tar.gz --strip-components=1
 
 FROM alpine:3.19
 
