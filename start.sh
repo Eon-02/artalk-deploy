@@ -22,4 +22,4 @@ elif [ -n "$RAILWAY_PUBLIC_DOMAIN" ]; then
   echo "Artalk API 地址: https://$RAILWAY_PUBLIC_DOMAIN"
 fi
 
-exec /app/artalk server -c /app/artalk.yml -p $PORT
+exec /app/artalk server -c /app/artalk.yml --port $PORT
